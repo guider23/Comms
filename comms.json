@@ -1,0 +1,26 @@
+{
+    "preserve_patterns": [
+        "#[0-9a-fA-F]{3,8}\\b",
+        "https?://[^\\s]+",
+        "#!/[^\\n]+",
+        "#pragma\\s+",
+        "#include\\s+",
+        "#define\\s+",
+        "#if\\w*\\s+",
+        "#endif\\b",
+        "#undef\\s+",
+        "#error\\s+",
+        "#warning\\s+"
+    ],
+    "backup_directory": ".backup",
+    "supported_extensions": [
+        ".py", ".js", ".ts", ".jsx", ".tsx",
+        ".java", ".c", ".cpp", ".h", ".hpp",
+        ".cs", ".php", ".go", ".rs", ".swift",
+        ".kt", ".scala", ".css", ".scss", ".sass",
+        ".less", ".html", ".htm", ".xml",
+        ".sh", ".bash", ".zsh", ".fish", ".ps1",
+        ".rb", ".pl", ".pm", ".r", ".sql",
+        ".yaml", ".yml", ".m", ".lua"
+    ]
+}
