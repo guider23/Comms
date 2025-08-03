@@ -272,4 +272,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made for developers who value clean, production-ready code.**
+**Made for vibe code developers who value clean, production-ready code.**
+
