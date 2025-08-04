@@ -26,7 +26,7 @@ pip install comment-remover-cli
 
 ### From Source
 ```bash
-git clone https://github.com/guider23/Comms.git
+git clone https://github.com/guider23/comment-remover-cli.git
 cd Comms
 pip install .
 ```
@@ -235,7 +235,7 @@ We welcome contributions! Please follow these steps:
 ### Development Setup
 
 ```bash
-git clone https://github.com/guider23/Comms.git
+git clone https://github.com/guider23/comment-remover-cli.git
 cd Comms
 pip install -e .
 ```
@@ -252,11 +252,15 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- **Issues**: Report bugs on [GitHub Issues](https://github.com/guider23/Comms/issues)
+- **Issues**: Report bugs on [GitHub Issues](https://github.com/guider23/comment-remover-cli/issues)
 - **PyPI Package**: [comment-remover-cli](https://pypi.org/project/comment-remover-cli/)
-- **Documentation**: Full docs at [GitHub Repository](https://github.com/guider23/Comms)
+- **Documentation**: Full docs at [GitHub Repository](https://github.com/guider23/comment-remover-cli)
 
 ## Changelog
+
+### v1.2.1
+- Enchanced Experience
+- Improve error handling
 
 ### v1.1.0
 - Professional documentation
@@ -273,3 +277,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made for developers who value clean, production-ready code.**
+
