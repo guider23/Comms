@@ -33,7 +33,7 @@ pip install comment-remover-cli==1.2.0
 
 ### From Source
 ```bash
-git clone https://github.com/guider23/Comms.git
+git clone https://github.com/guider23/comment-remover-cli.git
 cd Comms
 pip install .
 ```
@@ -280,6 +280,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made for vibe code developers who value clean, production-ready code.**
+
 
 
 
