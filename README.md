@@ -35,7 +35,7 @@ pip install .
 
 ```bash
 # Remove comments from current directory
-python -m comms.cli
+python -m comms.cli (or) comms
 
 # Remove comments from specific directory
 python -m comms.cli /path/to/your/project
@@ -277,4 +277,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made for developers who value clean, production-ready code.**
+
 
