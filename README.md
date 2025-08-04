@@ -1,5 +1,11 @@
 # Comment Remover CLI
 
+```bash
+comms
+```
+
+<img width="1536" height="1024" alt="comms_logo" src="https://github.com/user-attachments/assets/175c9792-ae54-4f13-9a23-578405865c78" />
+
 [![PyPI version](https://badge.fury.io/py/comment-remover-cli.svg)](https://badge.fury.io/py/comment-remover-cli)
 [![Python Support](https://img.shields.io/pypi/pyversions/comment-remover-cli.svg)](https://pypi.org/project/comment-remover-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -16,6 +22,10 @@ A high-accuracy Python tool for removing comments from programming files while p
 - **High Performance**: Efficient processing of entire directory trees
 - **Recursive Scanning**: Processes all subdirectories automatically
 - **Robust Error Handling**: Graceful handling of permission errors and encoding issues
+
+
+<img width="1536" height="1024" alt="comms" src="https://github.com/user-attachments/assets/94d97b01-dee9-4a5a-966d-86cb34f36cff" />
+
 
 ## Installation
 
@@ -276,6 +286,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made for developers who value clean, production-ready code.**
+**Made for vibe code developers who acts as devs**
+
 
 
