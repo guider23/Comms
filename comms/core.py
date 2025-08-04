@@ -20,11 +20,11 @@ class CommentRemover:
         self.preserve_patterns = preserve_patterns or []
         self.backup_dir = Path.cwd() / '.backup'
         
-        # Supported file extensions mapped to their comment styles
+
         self.supported_extensions = {
             '.py': 'python',
             '.js': 'javascript',
-            '.ts': 'typescript', 
+            '.ts': 'typescript',
             '.jsx': 'javascript',
             '.tsx': 'typescript',
             '.java': 'c_style',
@@ -70,7 +70,7 @@ class CommentRemover:
         try:
             self.backup_dir.mkdir(exist_ok=True)
             
-            # Create relative path structure in backup
+
             rel_path = file_path.relative_to(Path.cwd())
             backup_path = self.backup_dir / rel_path
             backup_path.parent.mkdir(parents=True, exist_ok=True)
@@ -83,12 +83,12 @@ class CommentRemover:
     
     def is_preserve_pattern(self, content: str, comment_start: int) -> bool:
         """Check if the comment-like pattern should be preserved."""
-        # Extract the potential comment part starting from comment_start
+
         remaining_content = content[comment_start:]
         
-        # Check each preserve pattern
+
         for pattern in self.preserve_patterns:
-            # Check if the pattern matches at the beginning of the remaining content
+
             match = re.match(pattern, remaining_content)
             if match:
                 return True
@@ -104,7 +104,7 @@ class CommentRemover:
                 result.append(line)
                 continue
                 
-            # Handle strings and comments
+
             new_line = ""
             i = 0
             in_single_quote = False
@@ -123,7 +123,7 @@ class CommentRemover:
                     new_line += char
                     escape_next = True
                 elif not any([in_single_quote, in_double_quote, in_triple_single, in_triple_double]):
-                    # Not in any string
+
                     if i + 2 < len(line) and line[i:i+3] == '"""':
                         in_triple_double = True
                         new_line += line[i:i+3]
@@ -139,15 +139,15 @@ class CommentRemover:
                         in_single_quote = True
                         new_line += char
                     elif char == '#':
-                        # Check if this should be preserved
+
                         if not self.is_preserve_pattern(line, i):
-                            break  # Rest of line is comment
+                            break
                         else:
                             new_line += char
                     else:
                         new_line += char
                 else:
-                    # Inside string
+
                     if in_triple_double and i + 2 < len(line) and line[i:i+3] == '"""':
                         in_triple_double = False
                         new_line += line[i:i+3]
@@ -189,7 +189,7 @@ class CommentRemover:
                 result += char
                 escape_next = True
             elif not in_single_quote and not in_double_quote:
-                # Not in string
+
                 if char == '"':
                     in_double_quote = True
                     result += char
@@ -197,30 +197,30 @@ class CommentRemover:
                     in_single_quote = True
                     result += char
                 elif i + 1 < len(content) and content[i:i+2] == '//':
-                    # Single-line comment
+
                     if not self.is_preserve_pattern(content, i):
-                        # Skip to end of line
+
                         while i < len(content) and content[i] != '\n':
                             i += 1
                         continue
                     else:
                         result += char
                 elif i + 1 < len(content) and content[i:i+2] == '/*':
-                    # Multi-line comment
+
                     if not self.is_preserve_pattern(content, i):
                         i += 2
-                        # Skip until */
+
                         while i + 1 < len(content) and content[i:i+2] != '*/':
                             i += 1
                         if i + 1 < len(content):
-                            i += 2  # Skip both * and /
+                            i += 2
                         continue
                     else:
                         result += char
                 else:
                     result += char
             else:
-                # Inside string
+
                 if in_double_quote and char == '"':
                     in_double_quote = False
                 elif in_single_quote and char == "'":
@@ -232,10 +232,27 @@ class CommentRemover:
         return result
     
     def remove_html_comments(self, content: str) -> str:
-        """Remove HTML/XML comments while preserving content."""
-        # Remove <!-- ... --> comments
-        pattern = r'<!--.*?-->'
-        return re.sub(pattern, '', content, flags=re.DOTALL)
+        """Remove HTML/XML comments and comments within style/script tags."""
+
+        content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
+        
+
+        def clean_style_tag(match):
+            style_content = match.group(1)
+            cleaned_css = self.remove_css_comments(style_content)
+            return f'<style{match.group(0).split("<style")[1].split(">")[0]}>{cleaned_css}</style>'
+        
+        content = re.sub(r'<style[^>]*>(.*?)</style>', clean_style_tag, content, flags=re.DOTALL | re.IGNORECASE)
+        
+
+        def clean_script_tag(match):
+            script_content = match.group(1)
+            cleaned_js = self.remove_c_style_comments(script_content)
+            return f'<script{match.group(0).split("<script")[1].split(">")[0]}>{cleaned_js}</script>'
+        
+        content = re.sub(r'<script[^>]*>(.*?)</script>', clean_script_tag, content, flags=re.DOTALL | re.IGNORECASE)
+        
+        return content
     
     def remove_css_comments(self, content: str) -> str:
         """Remove CSS comments while preserving color codes and URLs."""
@@ -253,13 +270,13 @@ class CommentRemover:
                     string_char = char
                     result += char
                 elif i + 1 < len(content) and content[i:i+2] == '/*':
-                    # CSS comment
+
                     if not self.is_preserve_pattern(content, i):
                         i += 2
                         while i + 1 < len(content) and content[i:i+2] != '*/':
                             i += 1
                         if i + 1 < len(content):
-                            i += 2  # Skip both * and /
+                            i += 2
                         continue
                     else:
                         result += char
@@ -285,7 +302,7 @@ class CommentRemover:
                 result.append(line)
                 continue
             
-            # Preserve shebang
+
             if line.startswith('#!'):
                 result.append(line)
                 continue
@@ -372,7 +389,7 @@ class CommentRemover:
             
             result.append(new_line.rstrip())
         
-        # Handle /* */ comments
+
         content = '\n'.join(result)
         return self.remove_c_style_comments(content)
     
@@ -391,11 +408,11 @@ class CommentRemover:
         elif file_type == 'sql':
             return self.remove_sql_comments(content)
         elif file_type == 'php':
-            # PHP supports both // and # comments
+
             content = self.remove_c_style_comments(content)
             return self.remove_shell_comments(content)
         elif file_type in ['matlab', 'lua']:
-            return self.remove_shell_comments(content)  # % and -- respectively, but similar handling
+            return self.remove_shell_comments(content)
         else:
             print(f"Unsupported file type: {file_type}")
             return content
@@ -409,20 +426,20 @@ class CommentRemover:
             
             file_type = self.supported_extensions[suffix]
             
-            # Read file
+
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                 content = f.read()
             
-            # Remove comments
+
             processed_content = self.remove_comments_by_type(content, file_type)
             
-            # Only write if content changed
+
             if processed_content != content:
-                # Create backup
+
                 if not self.create_backup(file_path):
                     return False
                 
-                # Write processed content
+
                 with open(file_path, 'w', encoding='utf-8') as f:
                     f.write(processed_content)
                 
@@ -440,7 +457,7 @@ class CommentRemover:
         try:
             for item in directory.rglob('*'):
                 if item.is_file() and item.suffix.lower() in self.supported_extensions:
-                    # Skip backup directory
+
                     if '.backup' not in item.parts:
                         files.append(item)
         except PermissionError:
@@ -455,7 +472,7 @@ class CommentRemover:
         if not target.exists():
             raise FileNotFoundError(f"Target path does not exist: {target}")
         
-        # Collect files to process
+
         if target.is_file():
             files = [target] if target.suffix.lower() in self.supported_extensions else []
         else:
@@ -478,28 +495,37 @@ class CommentRemover:
             'dry_run': dry_run
         }
         
-        print(f"Found {len(files)} supported files to process...")
+        print(f"🔍 Found {len(files)} supported files to process...")
         
-        for file_path in files:
+
+        total_files = len(files)
+        
+        for i, file_path in enumerate(files, 1):
             try:
+
+                progress_bar = "█" * (i * 20 // total_files) + "░" * (20 - (i * 20 // total_files))
+                print(f"\r📄 [{progress_bar}] {i:3d}/{total_files} | {file_path.name[:30]:<30}", end="", flush=True)
+                
                 if dry_run:
-                    # Just check if file would be processed
+
                     suffix = file_path.suffix.lower()
                     if suffix in self.supported_extensions:
                         results['files'].append(str(file_path))
                         results['processed'] += 1
                 else:
-                    # Actually process the file
+
                     if self.process_file(file_path):
                         results['modified'] += 1
-                        print(f"Processed: {file_path}")
                     
                     results['files'].append(str(file_path))
                     results['processed'] += 1
                     
             except Exception as e:
-                print(f"Error with {file_path}: {e}")
+                print(f"\n❌ Error with {file_path}: {e}")
                 results['errors'] += 1
+        
+
+        print("\r" + " " * 80 + "\r", end="")
         
         if dry_run:
             results['message'] = f"Dry run: Would process {results['processed']} files"

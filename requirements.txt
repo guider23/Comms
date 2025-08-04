@@ -1,0 +1,7 @@
+# Comment Removal Tool - Requirements
+# This package has no external dependencies beyond Python standard library
+
+# For development and testing (optional):
+# pytest>=6.0.0
+# black>=21.0.0
+# flake8>=3.8.0

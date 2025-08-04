@@ -21,7 +21,7 @@ def get_backup_files() -> List[Tuple[Path, Path]]:
     backup_files = []
     for backup_file in backup_dir.rglob('*'):
         if backup_file.is_file():
-            # Calculate original path
+
             rel_path = backup_file.relative_to(backup_dir)
             original_path = Path.cwd() / rel_path
             backup_files.append((backup_file, original_path))
@@ -32,10 +32,10 @@ def get_backup_files() -> List[Tuple[Path, Path]]:
 def restore_file(backup_path: Path, original_path: Path) -> bool:
     """Restore a single file from backup."""
     try:
-        # Create directory if it doesn't exist
+
         original_path.parent.mkdir(parents=True, exist_ok=True)
         
-        # Copy backup to original location
+
         shutil.copy2(backup_path, original_path)
         return True
     
@@ -55,7 +55,7 @@ def restore_from_backup() -> int:
     
     print(f"🔄 Restoring files from backup: {backup_dir.absolute()}")
     
-    # Get backup files
+
     backup_files = get_backup_files()
     
     if not backup_files:
@@ -64,7 +64,7 @@ def restore_from_backup() -> int:
     
     print(f"📁 Found {len(backup_files)} files to restore")
     
-    # Restore files
+
     restored_count = 0
     failed_count = 0
     
@@ -106,7 +106,7 @@ def show_backup_status() -> None:
     print(f"   Directory: {backup_dir.absolute()}")
     print(f"   Files: {len(backup_files)}")
     
-    # Calculate total size
+
     total_size = 0
     for backup_path, _ in backup_files:
         try:
@@ -114,11 +114,11 @@ def show_backup_status() -> None:
         except:
             pass
     
-    # Format size
+
     size_str = format_size(total_size)
     print(f"   Size: {size_str}")
     
-    # Show creation time of backup directory
+
     try:
         backup_time = backup_dir.stat().st_mtime
         backup_time_str = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(backup_time))

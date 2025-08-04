@@ -20,34 +20,40 @@ from .config import load_config
 def show_help():
     """Show help information."""
     print("""
-🔧 Comment Removal Tool
+╭─────────────────────────────────────────────────────────────╮
+│                   � Comment Removal Tool                   │
+╰─────────────────────────────────────────────────────────────╯
 
-USAGE:
-  comms [directory]          # Remove comments from directory
-  comms --undo              # Restore files from backup
-  comms --demo              # Create demo files for testing
-  comms --config            # Show configuration options
-  comms --help              # Show this help
+┌─ USAGE ─────────────────────────────────────────────────────┐
+│  comms [directory]          Remove comments from directory │
+│  comms --undo              Restore files from backup       │
+│  comms --demo              Create demo files for testing   │
+│  comms --config            Show configuration options      │
+│  comms --help              Show this help                  │
+└─────────────────────────────────────────────────────────────┘
 
-EXAMPLES:
-  comms                     # Current directory (recursive)
-  comms /path/to/project    # Specific directory (recursive)
-  comms --undo              # Restore from .backup/
-  comms --demo              # Create test files in demo_files/
+┌─ EXAMPLES ──────────────────────────────────────────────────┐
+│  comms                     Current directory (recursive)   │
+│  comms /path/to/project    Specific directory (recursive)  │
+│  comms --undo              Restore from .backup/           │
+│  comms --demo              Create test files in demo_files/│
+└─────────────────────────────────────────────────────────────┘
 
-FEATURES:
-  • Supports 20+ programming languages
-  • Creates automatic backups in .backup/
-  • Preserves color codes, URLs, shebangs, preprocessor directives
-  • Recursive directory scanning
-  • Safe operation with confirmation prompts
+┌─ FEATURES ──────────────────────────────────────────────────┐
+│  ✨ Supports 20+ programming languages                     │
+│  🛡️  Creates automatic backups in .backup/                 │
+│  🎯 Preserves color codes, URLs, shebangs, preprocessors   │
+│  📁 Recursive directory scanning                           │
+│  🔒 Safe operation with confirmation prompts               │
+└─────────────────────────────────────────────────────────────┘
 
-PRESERVED PATTERNS:
-  • Color codes: #FF5733, #123ABC
-  • URLs: https://example.com, http://site.com
-  • Shebangs: #!/usr/bin/env python
-  • C preprocessor: #include, #define, #if, #endif
-  • Content inside strings
+┌─ PRESERVED PATTERNS ────────────────────────────────────────┐
+│  🎨 Color codes: #FF5733, #123ABC                          │
+│  🔗 URLs: https://example.com, http://site.com             │
+│  ⚡ Shebangs: #!/usr/bin/env python                        │
+│  🔧 C preprocessor:
+│  📝 Content inside strings                                 │
+└─────────────────────────────────────────────────────────────┘
 """)
 
 
@@ -78,36 +84,42 @@ def get_directory_info(path: Path) -> Tuple[int, int]:
 
 def show_status(results: dict):
     """Show processing results in a formatted way."""
-    print("\n" + "="*50)
-    print("📊 PROCESSING COMPLETE")
-    print("="*50)
+    print("\n╭─────────────────────────────────────────────────────────────╮")
+    print("│                  🎉 PROCESSING COMPLETE                     │")
+    print("╰─────────────────────────────────────────────────────────────╯")
     
     if results.get('dry_run', False):
-        print(f"🔍 Dry Run Results:")
-        print(f"   Files found: {results['processed']}")
-        print(f"   No changes made (dry run mode)")
+        print(f"┌─ DRY RUN RESULTS ───────────────────────────────────────────┐")
+        print(f"│  🔍 Files found: {results['processed']:<41} │")
+        print(f"│  📝 No changes made (dry run mode)                         │")
+        print(f"└─────────────────────────────────────────────────────────────┘")
     else:
-        print(f"📁 Files processed: {results['processed']}")
-        print(f"✏️  Files modified: {results['modified']}")
-        print(f"❌ Errors: {results['errors']}")
+        print(f"┌─ RESULTS ───────────────────────────────────────────────────┐")
+        print(f"│  📁 Files processed: {results['processed']:<39} │")
+        print(f"│  ✏️  Files modified: {results['modified']:<40} │")
+        print(f"│  ❌ Errors: {results['errors']:<48} │")
+        print(f"└─────────────────────────────────────────────────────────────┘")
         
         if results['modified'] > 0:
             backup_path = Path('.backup')
             if backup_path.exists():
-                print(f"💾 Backup created: {backup_path.absolute()}")
-                print(f"🔄 To restore: comms --undo")
+                print(f"\n┌─ BACKUP INFO ───────────────────────────────────────────────┐")
+                print(f"│  💾 Backup created: {str(backup_path.absolute())[:40]:<40} │")
+                print(f"│  🔄 To restore: comms --undo                               │")
+                print(f"└─────────────────────────────────────────────────────────────┘")
     
     if results.get('message'):
-        print(f"\n{results['message']}")
+        print(f"\n💬 {results['message']}")
 
 
 def confirm_action(message: str) -> bool:
     """Get user confirmation for potentially destructive actions."""
     try:
-        response = input(f"{message} (y/N): ").strip().lower()
+        print(f"\n❓ {message}")
+        response = input("   Continue? (y/N): ").strip().lower()
         return response in ['y', 'yes']
     except KeyboardInterrupt:
-        print("\nOperation cancelled.")
+        print("\n\n❌ Operation cancelled.")
         return False
 
 
@@ -115,12 +127,12 @@ def main():
     """Main CLI entry point."""
     args = sys.argv[1:]
     
-    # Handle help
-    if not args or '--help' in args or '-h' in args:
+
+    if '--help' in args or '-h' in args:
         show_help()
         return
     
-    # Handle undo
+
     if '--undo' in args:
         backup_dir = Path('.backup')
         if not backup_dir.exists():
@@ -134,7 +146,7 @@ def main():
                 restored_count = restore_from_backup()
                 print(f"✅ Restored {restored_count} files from backup")
                 
-                # Remove backup directory
+
                 if confirm_action("Remove backup directory?"):
                     shutil.rmtree(backup_dir)
                     print("🗑️  Backup directory removed")
@@ -143,7 +155,7 @@ def main():
                 print(f"❌ Error during restore: {e}")
         return
     
-    # Handle demo
+
     if '--demo' in args:
         try:
             demo_dir = create_demo_files()
@@ -154,7 +166,7 @@ def main():
             print(f"❌ Error creating demo: {e}")
             return
     
-    # Handle config
+
     if '--config' in args:
         try:
             config = load_config()
@@ -166,7 +178,7 @@ def main():
             print(f"❌ Error loading config: {e}")
         return
     
-    # Handle target directory
+
     target_path = args[0] if args else "."
     target = Path(target_path)
     
@@ -174,7 +186,7 @@ def main():
         print(f"❌ Path does not exist: {target}")
         return
     
-    # Load configuration
+
     try:
         config = load_config()
         preserve_patterns = config.get('preserve_patterns', [])
@@ -182,47 +194,71 @@ def main():
         print(f"⚠️  Warning: Could not load config: {e}")
         preserve_patterns = []
     
-    # Show directory info
+
     if target.is_dir():
         file_count, total_size = get_directory_info(target)
-        print(f"📁 Target: {target.absolute()}")
-        print(f"📊 Found: {file_count} files ({format_size(total_size)})")
+        
+        print("\n╭─────────────────────────────────────────────────────────────╮")
+        print("│                     📁 SCAN RESULTS                         │")
+        print("╰─────────────────────────────────────────────────────────────╯")
+        print(f"┌─ TARGET ────────────────────────────────────────────────────┐")
+        print(f"│  📂 Directory: {str(target.absolute())[:45]:<45} │")
+        print(f"│  📊 Files found: {file_count:<42} │")
+        print(f"│  💾 Total size: {format_size(total_size):<43} │")
+        print(f"└─────────────────────────────────────────────────────────────┘")
         
         if file_count == 0:
-            print("❌ No files found to process")
+            print("\n❌ No supported files found to process")
             return
+        
+
+        print(f"\n┌─ SAFETY FEATURES ───────────────────────────────────────────┐")
+        print(f"│  🛡️  Automatic backups in .backup/ directory               │")
+        print(f"│  🎯 Preserves: Colors, URLs, Shebangs, Preprocessors       │")
+        print(f"│  🔄 Full restore available with: comms --undo              │")
+        print(f"│  ⚠️  Previous backups will be overwritten                  │")
+        print(f"└─────────────────────────────────────────────────────────────┘")
         
         if not confirm_action(f"Process {file_count} files recursively?"):
-            print("Operation cancelled.")
+            print("\n❌ Operation cancelled.")
             return
     else:
-        print(f"📄 Target file: {target.absolute()}")
+        print(f"\n╭─────────────────────────────────────────────────────────────╮")
+        print(f"│                      📄 FILE TARGET                         │")
+        print(f"╰─────────────────────────────────────────────────────────────╯")
+        print(f"│  📁 File: {str(target.absolute())[:50]:<50} │")
+        print(f"└─────────────────────────────────────────────────────────────┘")
+        
         if not confirm_action("Process this file?"):
-            print("Operation cancelled.")
+            print("\n❌ Operation cancelled.")
             return
     
-    # Process files
+
     try:
-        print("\n🚀 Starting comment removal...")
+        print("\n╭─────────────────────────────────────────────────────────────╮")
+        print("│                   🚀 PROCESSING STARTED                     │")
+        print("╰─────────────────────────────────────────────────────────────╯")
         start_time = time.time()
         
-        # Create comment remover with config
+
         remover = CommentRemover(preserve_patterns=preserve_patterns)
         
-        # Run the process
+
         results = remover.run(target_path)
         
         end_time = time.time()
         processing_time = end_time - start_time
         
-        # Show results
+
         show_status(results)
-        print(f"⏱️  Processing time: {processing_time:.2f} seconds")
+        print(f"\n┌─ TIMING ────────────────────────────────────────────────────┐")
+        print(f"│  ⏱️  Processing time: {processing_time:.2f} seconds{' '*(23-len(f'{processing_time:.2f}'))} │")
+        print(f"└─────────────────────────────────────────────────────────────┘")
         
     except KeyboardInterrupt:
-        print("\n❌ Operation cancelled by user")
+        print("\n\n❌ Operation cancelled by user")
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"\n❌ Error: {e}")
 
 
 if __name__ == "__main__":

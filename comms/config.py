@@ -13,9 +13,9 @@ from typing import Dict, Optional, Any
 def load_config() -> Optional[Dict[str, Any]]:
     """Load configuration from available sources."""
     config_locations = [
-        Path.cwd() / "comms.json",          # Current directory
-        Path.home() / ".comms.json",        # Home directory
-        Path.cwd() / ".comms.json",         # Hidden file in current directory
+        Path.cwd() / "comms.json",
+        Path.home() / ".comms.json",
+        Path.cwd() / ".comms.json",
     ]
     
     for config_path in config_locations:
@@ -36,17 +36,17 @@ def get_default_config() -> Dict[str, Any]:
     """Get the default configuration."""
     return {
         "preserve_patterns": [
-            r"#[0-9a-fA-F]{3,8}\\b",  # Color codes: #FF5733, #123
-            r"https?://[^\\s]+",       # URLs
-            r"#!/[^\\n]+",             # Shebang lines
-            r"#pragma\\s+",            # C pragmas
-            r"#include\\s+",           # C includes
-            r"#define\\s+",            # C defines
-            r"#if\\w*\\s+",            # C conditionals
-            r"#endif\\b",              # C endif
-            r"#undef\\s+",             # C undef
-            r"#error\\s+",             # C error
-            r"#warning\\s+",           # C warning
+            r"#[0-9a-fA-F]{3,8}\\b",
+            r"https?://[^\\s]+",
+            r"#!/[^\\n]+",
+            r"#pragma\\s+",
+            r"#include\\s+",
+            r"#define\\s+",
+            r"#if\\w*\\s+",
+            r"#endif\\b",
+            r"#undef\\s+",
+            r"#error\\s+",
+            r"#warning\\s+",
         ],
         "backup_directory": ".backup",
         "supported_extensions": [
@@ -84,26 +84,26 @@ def update_config(updates: Dict[str, Any], path: Optional[Path] = None) -> bool:
             Path.cwd() / ".comms.json",
         ]
         
-        # Find existing config or use default location
+
         for config_path in config_locations:
             if config_path.exists():
                 path = config_path
                 break
         else:
-            path = config_locations[0]  # Use first location as default
+            path = config_locations[0]
     
     try:
-        # Load existing config or use defaults
+
         if path.exists():
             with open(path, 'r', encoding='utf-8') as f:
                 config = json.load(f)
         else:
             config = get_default_config()
         
-        # Update with new values
+
         config.update(updates)
         
-        # Write back
+
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(config, f, indent=4, ensure_ascii=False)
         
@@ -118,7 +118,7 @@ def validate_config(config: Dict[str, Any]) -> tuple[bool, list[str]]:
     """Validate configuration structure and values."""
     errors = []
     
-    # Check preserve_patterns
+
     if 'preserve_patterns' in config:
         if not isinstance(config['preserve_patterns'], list):
             errors.append("preserve_patterns must be a list")
@@ -127,12 +127,12 @@ def validate_config(config: Dict[str, Any]) -> tuple[bool, list[str]]:
                 if not isinstance(pattern, str):
                     errors.append(f"preserve_patterns[{i}] must be a string")
     
-    # Check backup_directory
+
     if 'backup_directory' in config:
         if not isinstance(config['backup_directory'], str):
             errors.append("backup_directory must be a string")
     
-    # Check supported_extensions
+
     if 'supported_extensions' in config:
         if not isinstance(config['supported_extensions'], list):
             errors.append("supported_extensions must be a list")

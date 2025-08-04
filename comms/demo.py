@@ -14,33 +14,33 @@ def create_demo_files() -> Path:
     demo_dir = Path("demo_files")
     demo_dir.mkdir(exist_ok=True)
     
-    # Sample files with comments
+
     demo_files = {
         'test.py': '''#!/usr/bin/env python3
-# This is a single-line comment that should be removed
+
 """
 This is a docstring that should be preserved
 """
-import requests  # This comment should be removed
+import requests
 
 def process_data():
-    # Another comment to remove
-    url = "https://api.example.com"  # URL should be preserved
-    color = "#FF5733"  # Color code should be preserved
+
+    url = "https://api.example.com"
+    color = "#FF5733"
     
-    # Multi-line comment
-    # that spans several lines
-    # should all be removed
+
+
+
     
     data = {
-        "comment": "This # is not a comment",  # But this is
-        "color": "#123ABC",  # Color preserved
-        "url": "http://test.com#anchor"  # URL with # preserved
+        "comment": "This # is not a comment",
+        "color": "#123ABC",
+        "url": "http://test.com#anchor"
     }
     
     return data
 
-# Final comment to remove
+
 ''',
         
         'test.js': '''// Single-line comment to remove
@@ -136,38 +136,38 @@ int main() {
 ''',
         
         'test.sh': '''#!/bin/bash
-# Shell script comment to remove
-# Another comment
 
-# This shebang above should be preserved
-url="https://example.com"  # URL preserved
-color="#FF5733"  # Color preserved
 
-# Function comment
+
+
+url="https://example.com"
+color="#FF5733"
+
+
 function process_data() {
-    # Local comment
-    echo "URL: $url"  # Comment removed
-    echo "Color: $color"  # Comment removed
+
+    echo "URL: $url"
+    echo "Color: $color"
 }
 
-# Multi-line comment
-# spanning several lines
-# all should be removed
+
+
+
 
 process_data
-# End comment
+
 ''',
         
         'test.sql': '''-- SQL comment to remove
 /* Multi-line SQL comment
    that should be removed */
 
-SELECT 
+SELECT
     name,  -- Column comment
     email,  -- Another comment
     url  -- URL column
 FROM users
-WHERE 
+WHERE
     color = '#FF5733'  -- Color preserved
     AND url LIKE 'https://%'  -- URL pattern preserved
     
@@ -178,22 +178,22 @@ ORDER BY name;
         
         'test.php': '''<?php
 // PHP comment to remove
-# Alternative PHP comment style
+
 /* Multi-line PHP comment
    to be removed */
 
 $url = "https://example.com";  // URL preserved
-$color = "#FF5733";  # Color preserved
+$color = "#FF5733";
 
 function processData() {
     // Function comment
-    global $url, $color;  # Mixed comment styles
+    global $url, $color;
     
     /* Block comment
        spanning lines */
     
     echo "URL: " . $url;  // Output comment
-    echo "Color: " . $color;  # Another output comment
+    echo "Color: " . $color;
 }
 
 // End of file comment
@@ -201,21 +201,21 @@ function processData() {
 '''
     }
     
-    # Create the demo files
+
     for filename, content in demo_files.items():
         file_path = demo_dir / filename
         with open(file_path, 'w', encoding='utf-8') as f:
             f.write(content)
     
-    # Create a subdirectory with more files
+
     subdir = demo_dir / "subdirectory"
     subdir.mkdir(exist_ok=True)
     
     nested_files = {
         'nested.py': '''# Nested file comment
 def nested_function():
-    # Local comment
-    return "https://nested.example.com"  # URL preserved
+
+    return "https://nested.example.com"
 ''',
         
         'nested.js': '''// Nested JavaScript file
@@ -253,7 +253,7 @@ def show_demo_info():
     print(f"📁 Demo directory: {demo_dir.absolute()}")
     print(f"📊 Files found: {len(files)}")
     
-    # Group by extension
+
     by_ext = {}
     for file in files:
         ext = file.suffix

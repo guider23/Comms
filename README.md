@@ -1,8 +1,4 @@
-# Comms -Comment Remover CLI
-
-<img width="1536" height="1024" alt="comms_logo" src="https://github.com/user-attachments/assets/4ffaef7a-334b-4a4b-852d-d43f121e6074" />
-
-
+# Comment Remover CLI
 
 [![PyPI version](https://badge.fury.io/py/comment-remover-cli.svg)](https://badge.fury.io/py/comment-remover-cli)
 [![Python Support](https://img.shields.io/pypi/pyversions/comment-remover-cli.svg)](https://pypi.org/project/comment-remover-cli/)
@@ -21,9 +17,6 @@ A high-accuracy Python tool for removing comments from programming files while p
 - **Recursive Scanning**: Processes all subdirectories automatically
 - **Robust Error Handling**: Graceful handling of permission errors and encoding issues
 
-<img width="1536" height="1024" alt="comms" src="https://github.com/user-attachments/assets/5efc9e47-cd32-43eb-9798-1ae6707d2bf8" />
-
-
 ## Installation
 
 ### From PyPI (Recommended)
@@ -33,7 +26,7 @@ pip install comment-remover-cli
 
 ### From Source
 ```bash
-git clone https://github.com/guider23/comment-remover-cli.git
+git clone https://github.com/guider23/Comms.git
 cd Comms
 pip install .
 ```
@@ -279,9 +272,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-**Made for vibe code developers who value clean, production-ready code.**
-
-
-
-
-
+**Made for developers who value clean, production-ready code.**

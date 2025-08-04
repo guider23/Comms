@@ -8,18 +8,18 @@ This allows the package to be installed via pip.
 from setuptools import setup, find_packages
 from pathlib import Path
 
-# Read README for long description
+
 readme_path = Path(__file__).parent / "README.md"
 long_description = readme_path.read_text(encoding='utf-8') if readme_path.exists() else ""
 
 setup(
     name="comment-remover-cli",
-    version="1.1.0",
-    description="High-accuracy comment removal tool for 20+ programming languages",
+    version="1.2.1",
+    description="High-accuracy comment removal tool for 20+ programming languages with beautiful CLI",
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="guider23",
-    author_email="sofiyasenthilkumar@gmail.com",  
+    author_email="sofiyasenthilkumar@gmail.com",
     url="https://github.com/guider23/Comms",
     project_urls={
         "Bug Tracker": "https://github.com/guider23/Comms/issues",
@@ -53,7 +53,7 @@ setup(
     ],
     python_requires=">=3.6",
     keywords="comments removal programming development tools parsing",
-    install_requires=[],  # No external dependencies!
+    install_requires=[],
     extras_require={
         "dev": [
             "pytest>=6.0",
