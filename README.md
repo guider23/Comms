@@ -28,7 +28,7 @@ A high-accuracy Python tool for removing comments from programming files while p
 
 ### From PyPI (Recommended)
 ```bash
-pip install comment-remover-cli==1.2.0
+pip install comment-remover-cli
 ```
 
 ### From Source
@@ -280,6 +280,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **Made for vibe code developers who value clean, production-ready code.**
+
 
 
 
