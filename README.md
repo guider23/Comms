@@ -10,7 +10,7 @@ comms
 [![Python Support](https://img.shields.io/pypi/pyversions/comment-remover-cli.svg)](https://pypi.org/project/comment-remover-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A high-accuracy Python tool for removing comments from programming files while preserving important code patterns such as color codes, URLs, and preprocessor directives.
+A high-accuracy Hand Crafted Python tool for removing comments from programming files while preserving important code patterns such as color codes, URLs, and preprocessor directives.
 
 I know Devs are against to this
 
@@ -308,4 +308,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Work by 🪙
+
 
