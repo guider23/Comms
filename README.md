@@ -3,7 +3,7 @@
 ```bash
 comms
 ```
-<img width="1584" height="396" alt="Junk (1)-modified (1)" src="https://github.com/user-attachments/assets/853840a0-fe67-4749-a05a-f3d03286b1e2" />
+<img width="1584" height="396" alt="Junk (1)-modified" src="https://github.com/user-attachments/assets/ed46942a-39ab-4873-827d-173b51ea2cee" />
 
 
 [![PyPI version](https://badge.fury.io/py/comment-remover-cli.svg)](https://badge.fury.io/py/comment-remover-cli)
@@ -308,5 +308,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Work by 🪙
+
 
 
