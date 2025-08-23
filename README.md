@@ -10,38 +10,39 @@ comms
 [![Python Support](https://img.shields.io/pypi/pyversions/comment-remover-cli.svg)](https://pypi.org/project/comment-remover-cli/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A high-accuracy Python tool for removing comments from programming files while preserving important code patterns such as color codes, URLs, and preprocessor directives.    
+A high-accuracy Python tool for removing comments from programming files while preserving important code patterns such as color codes, URLs, and preprocessor directives.
 
-I know Devs are against to this 
+I know Devs are against to this
+
 ### However
-This is just for fun purpose but works flaw-less.
 
+This is just for fun purpose but works flaw-less.
 
 ## Features
 
-- **Universal Language Support**: 20+ programming languages including Python, JavaScript, TypeScript, C/C++, Java, C#, Go, Rust, HTML, CSS, SQL, PHP, Ruby, and Shell scripts
-- **Safe Operation**: Automatic backup creation before processing
-- **Undo Capability**: Restore original files from backup
-- **Configurable Settings**: JSON-based configuration system
-- **Demo Mode**: Generate test files for validation
-- **High Performance**: Efficient processing of entire directory trees
-- **Recursive Scanning**: Processes all subdirectories automatically
-- **Robust Error Handling**: Graceful handling of permission errors and encoding issues
-
+* **Universal Language Support**: 20+ programming languages including Python, JavaScript, TypeScript, C/C++, Java, C#, Go, Rust, HTML, CSS, SQL, PHP, Ruby, and Shell scripts
+* **Safe Operation**: Automatic backup creation before processing
+* **Undo Capability**: Restore original files from backup
+* **Configurable Settings**: JSON-based configuration system
+* **Demo Mode**: Generate test files for validation
+* **High Performance**: Efficient processing of entire directory trees
+* **Recursive Scanning**: Processes all subdirectories automatically
+* **Robust Error Handling**: Graceful handling of permission errors and encoding issues
 
 <img width="1536" height="1024" alt="comms" src="https://github.com/user-attachments/assets/94d97b01-dee9-4a5a-966d-86cb34f36cff" />
-
 
 ## Installation
 
 ### From PyPI (Recommended)
+
 ```bash
 pip install comment-remover-cli
 ```
 
 ### From Source
+
 ```bash
-git clone https://github.com/guider23/comment-remover-cli.git
+git clone https://github.com/AuraCulture/Comms.git
 cd Comms
 pip install .
 ```
@@ -79,41 +80,42 @@ Options:
 
 ## Supported Languages
 
-| Language | Extensions | Line Comments | Block Comments |
-|----------|------------|---------------|----------------|
-| Python | .py | # | """ """ or ''' ''' |
-| JavaScript/TypeScript | .js, .jsx, .ts, .tsx | // | /* */ |
-| Java | .java | // | /* */ |
-| C/C++ | .c, .cpp, .h, .hpp | // | /* */ |
-| C# | .cs | // | /* */ |
-| Go | .go | // | /* */ |
-| Rust | .rs | // | /* */ |
-| PHP | .php | // | /* */ |
-| Ruby | .rb | # | =begin =end |
-| Shell/Bash | .sh, .bash | # | - |
-| SQL | .sql | -- | /* */ |
-| HTML | .html, .htm | - | <!-- --> |
-| CSS | .css | - | /* */ |
-| SCSS/Sass | .scss, .sass | // | /* */ |
-| Lua | .lua | -- | --[[ ]] |
-| Swift | .swift | // | /* */ |
-| Kotlin | .kt, .kts | // | /* */ |
+| Language              | Extensions           | Line Comments | Block Comments     |
+| --------------------- | -------------------- | ------------- | ------------------ |
+| Python                | .py                  | #             | """ """ or ''' ''' |
+| JavaScript/TypeScript | .js, .jsx, .ts, .tsx | //            | /\* \*/            |
+| Java                  | .java                | //            | /\* \*/            |
+| C/C++                 | .c, .cpp, .h, .hpp   | //            | /\* \*/            |
+| C#                    | .cs                  | //            | /\* \*/            |
+| Go                    | .go                  | //            | /\* \*/            |
+| Rust                  | .rs                  | //            | /\* \*/            |
+| PHP                   | .php                 | //            | /\* \*/            |
+| Ruby                  | .rb                  | #             | =begin =end        |
+| Shell/Bash            | .sh, .bash           | #             | -                  |
+| SQL                   | .sql                 | --            | /\* \*/            |
+| HTML                  | .html, .htm          | -             | <!-- -->           |
+| CSS                   | .css                 | -             | /\* \*/            |
+| SCSS/Sass             | .scss, .sass         | //            | /\* \*/            |
+| Lua                   | .lua                 | --            | --\[\[ ]]          |
+| Swift                 | .swift               | //            | /\* \*/            |
+| Kotlin                | .kt, .kts            | //            | /\* \*/            |
 
 ## Pattern Preservation
 
 The tool intelligently preserves:
 
-- **Color codes**: `#FF5733`, `#123ABC`
-- **URLs**: `https://example.com`, `http://site.com`
-- **Shebangs**: `#!/usr/bin/env python`
-- **C Preprocessor**: `#include`, `#define`, `#if`, `#endif`, etc.
-- **Content in strings**: Comments inside quoted strings remain untouched
+* **Color codes**: `#FF5733`, `#123ABC`
+* **URLs**: `https://example.com`, `http://site.com`
+* **Shebangs**: `#!/usr/bin/env python`
+* **C Preprocessor**: `#include`, `#define`, `#if`, `#endif`, etc.
+* **Content in strings**: Comments inside quoted strings remain untouched
 
 ## Example Usage
 
 ### Before Processing
 
 **Python file:**
+
 ```python
 #!/usr/bin/env python3
 # This is a comment to remove
@@ -130,6 +132,7 @@ def get_data():
 ### After Processing
 
 **Python file:**
+
 ```python
 #!/usr/bin/env python3
 import requests
@@ -174,41 +177,48 @@ Create a `config.json` file to customize behavior:
 ## Safety Features
 
 ### Automatic Backups
-- All original files are backed up to `.backup/` directory
-- Backup directory structure mirrors your project structure
-- Previous backups are overwritten on each run
+
+* All original files are backed up to `.backup/` directory
+* Backup directory structure mirrors your project structure
+* Previous backups are overwritten on each run
 
 ### Undo Operation
+
 ```bash
 # Restore from most recent backup
 python -m comms.cli --undo
 ```
 
 ### Pre-execution Warning
+
 The tool displays:
-- Number of files to be processed
-- File types detected
-- Clear warning about the operation
-- Requires explicit confirmation
+
+* Number of files to be processed
+* File types detected
+* Clear warning about the operation
+* Requires explicit confirmation
 
 ## Error Handling
 
-- **Permission errors**: Gracefully skipped with warnings
-- **Encoding issues**: Uses UTF-8 with error tolerance
-- **Backup failures**: File processing is skipped if backup fails
-- **Malformed files**: Processing continues with error reporting
+* **Permission errors**: Gracefully skipped with warnings
+* **Encoding issues**: Uses UTF-8 with error tolerance
+* **Backup failures**: File processing is skipped if backup fails
+* **Malformed files**: Processing continues with error reporting
 
 ## Advanced Usage
 
 ### Custom Configuration
+
 ```bash
 python -m comms.cli --config custom-config.json /my/project
 ```
 
 ### Processing Specific File Types
+
 Edit `config.json` to limit processing to specific languages or add new ones.
 
 ### Integration with Build Systems
+
 ```bash
 # In your build script
 python -m comms.cli src/ --config production-config.json
@@ -217,25 +227,28 @@ python -m comms.cli src/ --config production-config.json
 ## Technical Details
 
 ### String Handling
-- Properly handles escaped quotes in strings
-- Supports single, double, and triple-quoted strings (Python)
-- Preserves multiline strings and docstrings
+
+* Properly handles escaped quotes in strings
+* Supports single, double, and triple-quoted strings (Python)
+* Preserves multiline strings and docstrings
 
 ### Comment Detection
-- State-machine based parsing for accuracy
-- Context-aware comment detection
-- Handles nested comment structures
+
+* State-machine based parsing for accuracy
+* Context-aware comment detection
+* Handles nested comment structures
 
 ### Performance
-- Processes files sequentially for reliability
-- Memory-efficient line-by-line processing for large files
-- Minimal I/O operations
+
+* Processes files sequentially for reliability
+* Memory-efficient line-by-line processing for large files
+* Minimal I/O operations
 
 ## Requirements
 
-- Python 3.6 or higher
-- No external dependencies
-- Cross-platform (Windows, macOS, Linux)
+* Python 3.6 or higher
+* No external dependencies
+* Cross-platform (Windows, macOS, Linux)
 
 ## Contributing
 
@@ -250,7 +263,7 @@ We welcome contributions! Please follow these steps:
 ### Development Setup
 
 ```bash
-git clone https://github.com/guider23/comment-remover-cli.git
+git clone https://github.com/AuraCulture/Comms.git
 cd Comms
 pip install -e .
 ```
@@ -267,32 +280,31 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Support
 
-- **Issues**: Report bugs on [GitHub Issues](https://github.com/guider23/comment-remover-cli/issues)
-- **PyPI Package**: [comment-remover-cli](https://pypi.org/project/comment-remover-cli/)
-- **Documentation**: Full docs at [GitHub Repository](https://github.com/guider23/comment-remover-cli)
+* **Issues**: Report bugs on [GitHub Issues](https://github.com/AuraCulture/Comms/issues)
+* **PyPI Package**: [comment-remover-cli](https://pypi.org/project/comment-remover-cli/)
+* **Documentation**: Full docs at [GitHub Repository](https://github.com/AuraCulture/Comms)
 
 ## Changelog
 
 ### v1.2.1
-- Enchanced Experience
-- Improve error handling
+
+* Enchanced Experience
+* Improve error handling
 
 ### v1.1.0
-- Professional documentation
-- Improved error handling
-- Enhanced pattern preservation
-- Updated PyPI package
+
+* Professional documentation
+* Improved error handling
+* Enhanced pattern preservation
+* Updated PyPI package
 
 ### v1.0.0
-- Initial release
-- Support for 20+ programming languages
-- Automatic backup and undo functionality
-- Configurable settings
+
+* Initial release
+* Support for 20+ programming languages
+* Automatic backup and undo functionality
+* Configurable settings
 
 ---
 
 **Made for no-one**
-
-
-
-
