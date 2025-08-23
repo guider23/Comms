@@ -3,8 +3,8 @@
 ```bash
 comms
 ```
+<img width="1584" height="396" alt="Junk (1)-modified (1)" src="https://github.com/user-attachments/assets/853840a0-fe67-4749-a05a-f3d03286b1e2" />
 
-<img width="1536" height="1024" alt="comms_logo" src="https://github.com/user-attachments/assets/175c9792-ae54-4f13-9a23-578405865c78" />
 
 [![PyPI version](https://badge.fury.io/py/comment-remover-cli.svg)](https://badge.fury.io/py/comment-remover-cli)
 [![Python Support](https://img.shields.io/pypi/pyversions/comment-remover-cli.svg)](https://pypi.org/project/comment-remover-cli/)
@@ -308,3 +308,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 Work by 🪙
+
